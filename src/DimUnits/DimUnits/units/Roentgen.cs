@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Polimaster.Utils.DimUnits {
+namespace Polimaster.Utils.DimUnits.units {
     /// <summary>
     /// Roentgen units class (R).
     /// </summary>

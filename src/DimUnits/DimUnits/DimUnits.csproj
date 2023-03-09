@@ -4,6 +4,9 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <AssemblyName>Polimaster.Utils.DimUnits</AssemblyName>
+        <Company>Polimaster</Company>
+        <Authors>Polimaster</Authors>
     </PropertyGroup>
     <ItemGroup>
       <EmbeddedResource Update="res\Resources.resx">

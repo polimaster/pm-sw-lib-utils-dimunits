@@ -3,10 +3,7 @@ using System.Linq;
 using System.Threading;
 using Polimaster.Utils.DimUnits.res;
 
-namespace Polimaster.Utils.DimUnits {
-    public interface IUnit {
-    }
-
+namespace Polimaster.Utils.DimUnits.units {
     public struct UnitValue {
         /// <summary>
         /// Value

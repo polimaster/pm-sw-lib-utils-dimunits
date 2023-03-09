@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Polimaster.Utils.DimUnits{
+namespace Polimaster.Utils.DimUnits.units {
     public class Sievert : AUnit {
         public override UnitCode UnitCode => UnitCode.SIEVERT;
         protected override int Multiplier => 1;
@@ -8,14 +8,14 @@ namespace Polimaster.Utils.DimUnits{
         protected override Type DescType => typeof(MSievert);
     }
 
-    public class MSievert : Sievert{
+    public class MSievert : Sievert {
         public override UnitCode UnitCode => UnitCode.MSIEVERT;
         protected override int Multiplier => 1000;
         protected override Type AscType => typeof(Sievert);
         protected override Type DescType => typeof(MiSievert);
     }
 
-    public class MiSievert : Sievert{
+    public class MiSievert : Sievert {
         public override UnitCode UnitCode => UnitCode.MISIEVERT;
         protected override int Multiplier => 1000000;
         protected override Type AscType => typeof(MSievert);
