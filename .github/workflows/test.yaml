@@ -39,7 +39,7 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name="DimUnits-$tag"
           
-          dotnet publish src/DimUnits/DimUnits -c Release -o "$release_name"
+          dotnet publish src/DimUnits/DimUnits -c Release -o "$release_name" /p:AssemblyVersion="$tag"
 
           tar czvf "${release_name}.tar.gz" "$release_name"
 
