@@ -1,4 +1,4 @@
-namespace Polimaster.Utils.DimUnits;
+namespace Polimaster.Utils.DimUnits.channel;
 
 public enum ChannelCode {
     NONE = 0,
