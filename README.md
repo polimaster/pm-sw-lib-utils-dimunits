@@ -6,4 +6,5 @@ Dimension units converter and formatter for .NET Standard.
 ```csharp
 var value = new UnitValue(100, UnitCode.SIEVERT);
 var converted = value.Convert(UnitCode.MISIEVERT, false);
+var formatted = converted.ToString();
 ```

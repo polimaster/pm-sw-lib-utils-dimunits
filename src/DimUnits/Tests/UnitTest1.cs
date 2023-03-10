@@ -12,7 +12,9 @@ public class Tests {
 
         var value = new UnitValue(100, UnitCode.SIEVERT);
         var converted = value.Convert(UnitCode.MISIEVERT, false);
-        
+
+        var formatted = converted.ToString();
+
         Assert.Pass();
     }
 }
