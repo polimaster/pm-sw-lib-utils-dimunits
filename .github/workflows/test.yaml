@@ -22,7 +22,7 @@ jobs:
           #rm -r "$release_name"
           
           # Build nuget package
-          dotnet pack -c Release /p:AssemblyVersion="$tag"
+          dotnet pack src/DimUnits/DimUnits -c Release /p:AssemblyVersion="$tag"
           
       - name: Publish archive
         uses: softprops/action-gh-release@v1
