@@ -19,12 +19,12 @@ jobs:
           echo "Building $release_name"
           
           # Build archive
-          dotnet publish src/DimUnits/DimUnits -c Release -o "$release_name" -p:AssemblyVersion="$tag"
+          dotnet publish src/DimUnits/DimUnits -c Release -o "$release_name" -p:AssemblyVersion="$tag" -p:Version="$tag"
           tar czvf "${release_name}.tar.gz" "$release_name"
           #rm -r "$release_name"
           
           # Build nuget package
-          dotnet pack src/DimUnits/DimUnits -c Release -p:AssemblyVersion="$tag"
+          dotnet pack src/DimUnits/DimUnits -c Release -p:AssemblyVersion="$tag" -p:Version="$tag"
           
       - name: Publish archive
         uses: softprops/action-gh-release@v1
