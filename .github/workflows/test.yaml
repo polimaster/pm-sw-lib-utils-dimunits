@@ -19,10 +19,10 @@ jobs:
           # Build archive
           dotnet publish src/DimUnits/DimUnits -c Release -o "$release_name" /p:AssemblyVersion="$tag"
           tar czvf "${release_name}.tar.gz" "$release_name"
-          rm -r "$release_name"
+          #rm -r "$release_name"
           
           # Build nuget package
-          dotnet pack -c Release -o "$release_name" /p:AssemblyVersion="$tag"
+          dotnet pack -c Release /p:AssemblyVersion="$tag"
           
       - name: Publish archive
         uses: softprops/action-gh-release@v1
@@ -35,4 +35,4 @@ jobs:
         uses: nuget/setup-nuget@v1
       
       - name: Publish NuGet package
-        run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+        run: nuget push **/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
