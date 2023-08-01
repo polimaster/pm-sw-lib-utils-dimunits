@@ -1,5 +1,5 @@
 # Polimaster.Utils.DimUnits
-Dimension units converter and formatter for .NET Standard.
+Radiation units converter and formatter for .NET Standard.
 
 # Setup
 
@@ -7,7 +7,7 @@ Dimension units converter and formatter for .NET Standard.
 
 # Usage
 
-```csharp
+```c#
 // setting up variable (SIEVERT)
 var value = new UnitValue(100, UnitCode.SIEVERT);
 
