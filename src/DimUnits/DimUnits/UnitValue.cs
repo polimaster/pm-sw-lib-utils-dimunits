@@ -3,7 +3,10 @@ using Polimaster.Utils.DimUnits.units;
 
 namespace Polimaster.Utils.DimUnits;
 
-public struct UnitValue {
+/// <summary>
+/// Unit Value
+/// </summary>
+public readonly struct UnitValue {
     /// <summary>
     /// Value
     /// </summary>
@@ -20,16 +23,21 @@ public struct UnitValue {
     /// </summary>
     public readonly byte Accuracy;
 
+    /// <inheritdoc />
     public override string ToString() {
-        if (!Converter.UNITS.ContainsKey(Code)) throw new UnknownUnitsCodeException();
-        //Console.WriteLine(Code.ToString());
-        //Console.ReadLine();
-        return Converter.UNITS[Code].ValueToString(Value, Accuracy);
+        if (!Converter.Units.ContainsKey(Code)) throw new UnknownUnitsCodeException();
+        return Converter.Units[Code].ValueToString(Value, Accuracy);
     }
 
+    /// <summary>
+    /// Convert given value to string with given accuracy.
+    /// </summary>
+    /// <param name="accuracy"></param>
+    /// <returns></returns>
+    /// <exception cref="UnknownUnitsCodeException"></exception>
     public string ToString(int accuracy) {
-        if (!Converter.UNITS.ContainsKey(Code)) throw new UnknownUnitsCodeException();
-        return Converter.UNITS[Code].ValueToString(Value, accuracy);
+        if (!Converter.Units.ContainsKey(Code)) throw new UnknownUnitsCodeException();
+        return Converter.Units[Code].ValueToString(Value, accuracy);
     }
 
     /// <summary>
@@ -39,23 +47,25 @@ public struct UnitValue {
     /// <param name="tryFindPair"></param>
     /// <returns>New UnitValue</returns>
     public UnitValue Convert(UnitCode code, bool tryFindPair) {
-        return code == Code ? this : Converter.UNITS[Code].Convert(Value, code, Accuracy, tryFindPair);
+        return code == Code ? this : Converter.Units[Code].Convert(Value, code, Accuracy, tryFindPair);
     }
 
-    public string GetExt() {
-        return Converter.UNITS[Code].Ext;
-    }
+    /// <summary>
+    /// See <see cref="AUnit.Ext"/>
+    /// </summary>
+    /// <returns></returns>
+    public string GetExt() => Converter.Units[Code].Ext;
 
     public UnitValue(double value, UnitCode code, bool normalize) {
-        UnitCode nUnitCode = code;
-        Value = normalize ? Converter.UNITS[code].Normalize(value, out nUnitCode) : value;
+        var nUnitCode = code;
+        Value = normalize ? Converter.Units[code].Normalize(value, out nUnitCode) : value;
         Accuracy = AUnit.BASE_ACCURACY;
         Code = nUnitCode;
     }
 
     public UnitValue(double value, UnitCode code, bool normalize, bool dinamicaccuracy) {
-        UnitCode nUnitCode = code;
-        Value = normalize ? Converter.UNITS[code].Normalize(value, out nUnitCode) : value;
+        var nUnitCode = code;
+        Value = normalize ? Converter.Units[code].Normalize(value, out nUnitCode) : value;
         Accuracy = AUnit.BASE_ACCURACY;
         if (dinamicaccuracy)
             if (nUnitCode == UnitCode.MISIEVERT_PER_HOUR || nUnitCode == UnitCode.MISIEVERT)
@@ -66,17 +76,22 @@ public struct UnitValue {
     }
 
     /// <summary>
-    /// UnitValue Costructor.
+    /// UnitValue Constructor
     /// </summary>
-    /// <param name="value">Value</param>
-    /// <param name="code">UnitCode</param>
-    /// <param name="accuracy">Accuracy</param>
+    /// <param name="value"><see cref="Value"/></param>
+    /// <param name="code"><see cref="UnitCode"/></param>
+    /// <param name="accuracy"><see cref="Accuracy"/></param>
     public UnitValue(double value, UnitCode code, byte accuracy) {
         Value = value;
         Code = code;
         Accuracy = accuracy;
     }
 
+    /// <summary>
+    /// UnitValue Constructor
+    /// </summary>
+    /// <param name="value"><see cref="Value"/></param>
+    /// <param name="code"><see cref="UnitCode"/></param>
     public UnitValue(double value, UnitCode code) {
         Value = value;
         Code = code;

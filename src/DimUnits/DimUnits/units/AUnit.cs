@@ -11,10 +11,9 @@ public abstract class AUnit : IUnit {
     /// Base accuracy for to string conversions.
     /// </summary>
     public const int BASE_ACCURACY = 4;
-
+    
     /// <summary>
-    /// Value for this field MUST be from UnitType enum!
-    /// This value will be stored in db.
+    /// See <see cref="UnitCode"/>
     /// </summary>
     public abstract UnitCode UnitCode { get; }
 
@@ -24,28 +23,28 @@ public abstract class AUnit : IUnit {
     private const char DIGIT_2_EXT_DIVIDER = ' ';
 
     /// <summary>
-    /// Величина, показывающая отношение базовой еденицы к текущей.
-    /// Например, отношение милирентгена к рентгену - 1000, а микрорентгена к рентгену - 1000000.
-    /// У базовой еденицы эта величина - всегда 1.
+    /// Value showing the ratio of the base unit to the current one.
+    /// For example, the ratio of miro-roentgen to roentgen is 1000, and micro-roentgen to roentgen is 1000000.
+    /// For a base unit, this value is always 1.
     /// </summary>
     protected abstract int Multiplier { get; }
 
     /// <summary>
-    /// Example: for miliroentgen AscType is roentgen.
+    /// Example: for micro-roentgen AscType is roentgen.
     /// </summary>
-    protected abstract Type AscType { get; }
+    protected abstract Type? AscType { get; }
 
     /// <summary>
-    /// Example: for miliroentgen DescType is microroentgen.
+    /// Example: for miro-roentgen DescType is micro-roentgen.
     /// </summary>
-    protected abstract Type DescType { get; }
+    protected abstract Type? DescType { get; }
 
     /// <summary>
-    /// Extension od value. E.q. "R" or "mSv".
+    /// Extension of value. E.q. "R" or "mSv".
     /// </summary>
     public string Ext =>
-        Resources.ResourceManager.GetString(Enum.GetName(typeof(UnitCode), UnitCode),
-            Thread.CurrentThread.CurrentCulture);
+        Resources.ResourceManager.GetString(Enum.GetName(typeof(UnitCode), UnitCode) ?? string.Empty,
+            Thread.CurrentThread.CurrentCulture) ?? string.Empty;
 
     /// <summary>
     /// Converts given unit value to target.
@@ -60,24 +59,24 @@ public abstract class AUnit : IUnit {
 
         var v = 0d;
         var expressionFound = false;
-        foreach (var list in Converter.CONVERT_PAIRS) {
+        foreach (var list in Converter.ConvertPairs) {
             if (list.To.Contains(code) && list.From.Contains(UnitCode)) {
                 expressionFound = true;
-                v = list.From2To(value) * ((double)Converter.UNITS[code].Multiplier / Multiplier);
+                v = list.From2To(value) * ((double)Converter.Units[code].Multiplier / Multiplier);
                 break;
             }
 
             if (list.From.Contains(code) && list.To.Contains(UnitCode)) {
                 expressionFound = true;
-                v = list.To2From(value) * ((double)Converter.UNITS[code].Multiplier / Multiplier);
+                v = list.To2From(value) * ((double)Converter.Units[code].Multiplier / Multiplier);
                 break;
             }
         }
 
         if (!expressionFound) {
-            if (Converter.FAMILIES.Any(families => families.Contains(code) && families.Contains(UnitCode))) {
+            if (Converter.Families.Any(families => families != null && families.Contains(code) && families.Contains(UnitCode))) {
                 expressionFound = true;
-                v = value * ((double)Converter.UNITS[code].Multiplier / Multiplier);
+                v = value * ((double)Converter.Units[code].Multiplier / Multiplier);
             }
         }
 
@@ -126,13 +125,13 @@ public abstract class AUnit : IUnit {
         if (isInRange == -1 && DescType != null) {
             var unit = (AUnit)Activator.CreateInstance(DescType);
             code = unit.UnitCode;
-            return Converter.UNITS[code].Normalize(value * unit.Multiplier / Multiplier, out code);
+            return Converter.Units[code].Normalize(value * unit.Multiplier / Multiplier, out code);
         }
 
         if (isInRange == 1 && AscType != null) {
             var unit = (AUnit)Activator.CreateInstance(AscType);
             code = unit.UnitCode;
-            return Converter.UNITS[code].Normalize(value * unit.Multiplier / Multiplier, out code);
+            return Converter.Units[code].Normalize(value * unit.Multiplier / Multiplier, out code);
         }
 
         code = UnitCode;

@@ -1,0 +1,30 @@
+﻿name: Build & upload package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' # SDK Version to use.
+          source-url: https://nuget.pkg.github.com/polimaster/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Define version
+        run: |
+          tag=$(git describe --tags --abbrev=0)
+          echo "tag=$tag" >> "$GITHUB_ENV"
+      - name: Build package
+        run: dotnet build src/DimUnits/DimUnits --configuration Release -p:AssemblyVersion="$tag" -p:Version="$tag"
+      - name: Create the package
+        run: dotnet pack src/DimUnits/DimUnits --configuration Release -p:AssemblyVersion="$tag" -p:Version="$tag"
+      - name: Publish the package to GPR
+        run: dotnet nuget push src/DimUnits/DimUnits/bin/Release/*.nupkg
