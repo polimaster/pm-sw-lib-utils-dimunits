@@ -66,11 +66,10 @@ public abstract class AUnit : IUnit {
                 break;
             }
 
-            if (list.From.Contains(code) && list.To.Contains(UnitCode)) {
-                expressionFound = true;
-                v = list.To2From(value) * ((double)Converter.Units[code].Multiplier / Multiplier);
-                break;
-            }
+            if (!list.From.Contains(code) || !list.To.Contains(UnitCode)) continue;
+            expressionFound = true;
+            v = list.To2From(value) * ((double)Converter.Units[code].Multiplier / Multiplier);
+            break;
         }
 
         if (!expressionFound) {
@@ -105,37 +104,39 @@ public abstract class AUnit : IUnit {
     /// <returns></returns>
     public string ValueToString(double value, int accuracy, bool addExtension = true) {
         var isInRange = _VALUE_IS_IN_RANGE(value);
-        if (isInRange == -1 && DescType != null) {
-            var unit = (AUnit)Activator.CreateInstance(DescType);
-            var nvalue = value * unit.Multiplier / Multiplier;
-            return unit.ValueToString(nvalue, accuracy);
+        switch (isInRange) {
+            case -1 when DescType != null: {
+                var unit = (AUnit)Activator.CreateInstance(DescType);
+                var nvalue = value * unit.Multiplier / Multiplier;
+                return unit.ValueToString(nvalue, accuracy);
+            }
+            case 1 when AscType != null: {
+                var unit = (AUnit)Activator.CreateInstance(AscType);
+                var nvalue = value * unit.Multiplier / Multiplier;
+                return unit.ValueToString(nvalue, accuracy);
+            }
+            default:
+                return value.ToString("F0" + accuracy) + (addExtension ? DIGIT_2_EXT_DIVIDER + Ext : "");
         }
-
-        if (isInRange == 1 && AscType != null) {
-            var unit = (AUnit)Activator.CreateInstance(AscType);
-            var nvalue = value * unit.Multiplier / Multiplier;
-            return unit.ValueToString(nvalue, accuracy);
-        }
-
-        return value.ToString("F0" + accuracy) + (addExtension ? DIGIT_2_EXT_DIVIDER + Ext : "");
     }
 
     public double Normalize(double value, out UnitCode code) {
         int isInRange = _VALUE_IS_IN_RANGE(value);
-        if (isInRange == -1 && DescType != null) {
-            var unit = (AUnit)Activator.CreateInstance(DescType);
-            code = unit.UnitCode;
-            return Converter.Units[code].Normalize(value * unit.Multiplier / Multiplier, out code);
+        switch (isInRange) {
+            case -1 when DescType != null: {
+                var unit = (AUnit)Activator.CreateInstance(DescType);
+                code = unit.UnitCode;
+                return Converter.Units[code].Normalize(value * unit.Multiplier / Multiplier, out code);
+            }
+            case 1 when AscType != null: {
+                var unit = (AUnit)Activator.CreateInstance(AscType);
+                code = unit.UnitCode;
+                return Converter.Units[code].Normalize(value * unit.Multiplier / Multiplier, out code);
+            }
+            default:
+                code = UnitCode;
+                return value;
         }
-
-        if (isInRange == 1 && AscType != null) {
-            var unit = (AUnit)Activator.CreateInstance(AscType);
-            code = unit.UnitCode;
-            return Converter.Units[code].Normalize(value * unit.Multiplier / Multiplier, out code);
-        }
-
-        code = UnitCode;
-        return value;
     }
 
     /// <summary>

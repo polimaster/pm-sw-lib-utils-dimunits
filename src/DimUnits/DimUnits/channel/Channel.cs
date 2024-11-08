@@ -4,6 +4,9 @@ using Polimaster.Utils.DimUnits.res;
 
 namespace Polimaster.Utils.DimUnits.channel;
 
+/// <summary>
+/// Channel
+/// </summary>
 public struct Channel {
     /// <summary>
     /// See <see cref="ChannelCode"/>

@@ -16,15 +16,15 @@ public class Roentgen : AUnit {
     protected override Type? AscType => null;
 
     /// <inheritdoc />
-    protected override Type? DescType => typeof(MRoentgen);
+    protected override Type? DescType => typeof(MilliRoentgen);
 }
 
 /// <summary>
 /// Miliroentgen clas (mR).
 /// </summary>
-public class MRoentgen : Roentgen {
+public class MilliRoentgen : Roentgen {
     /// <inheritdoc />
-    public override UnitCode UnitCode => UnitCode.MROENTGEN;
+    public override UnitCode UnitCode => UnitCode.MILLI_ROENTGEN;
 
     /// <inheritdoc />
     protected override int Multiplier => 1000;
@@ -33,21 +33,21 @@ public class MRoentgen : Roentgen {
     protected override Type? AscType => typeof(Roentgen);
 
     /// <inheritdoc />
-    protected override Type? DescType => typeof(MiRoentgen);
+    protected override Type? DescType => typeof(MicroRoentgen);
 }
 
 /// <summary>
 /// Microroentgen class (μR)
 /// </summary>
-public class MiRoentgen : Roentgen {
+public class MicroRoentgen : Roentgen {
     /// <inheritdoc />
-    public override UnitCode UnitCode => UnitCode.MIROENTGEN;
+    public override UnitCode UnitCode => UnitCode.MICRO_ROENTGEN;
 
     /// <inheritdoc />
     protected override int Multiplier => 1000000;
 
     /// <inheritdoc />
-    protected override Type? AscType => typeof(MRoentgen);
+    protected override Type? AscType => typeof(MilliRoentgen);
 
     /// <inheritdoc />
     protected override Type? DescType => null;
@@ -61,26 +61,26 @@ public class RoentgenPerHour : Roentgen {
     protected override Type? AscType => null;
 
     /// <inheritdoc />
-    protected override Type DescType => typeof(MRoentgenPerHour);
+    protected override Type DescType => typeof(MilliRoentgenPerHour);
 }
 
-public class MRoentgenPerHour : MRoentgen {
+public class MilliRoentgenPerHour : MilliRoentgen {
     /// <inheritdoc />
-    public override UnitCode UnitCode => UnitCode.MROENTGEN_PER_HOUR;
+    public override UnitCode UnitCode => UnitCode.MILLI_ROENTGEN_PER_HOUR;
 
     /// <inheritdoc />
     protected override Type AscType => typeof(RoentgenPerHour);
 
     /// <inheritdoc />
-    protected override Type DescType => typeof(MiRoentgenPerHour);
+    protected override Type DescType => typeof(MicroRoentgenPerHour);
 }
 
-public class MiRoentgenPerHour : MiRoentgen {
+public class MicroRoentgenPerHour : MicroRoentgen {
     /// <inheritdoc />
-    public override UnitCode UnitCode => UnitCode.MIROENTGEN_PER_HOUR;
+    public override UnitCode UnitCode => UnitCode.MICRO_ROENTGEN_PER_HOUR;
 
     /// <inheritdoc />
-    protected override Type AscType => typeof(MRoentgenPerHour);
+    protected override Type AscType => typeof(MilliRoentgenPerHour);
 
     /// <inheritdoc />
     protected override Type? DescType => null;

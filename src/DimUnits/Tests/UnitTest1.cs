@@ -11,7 +11,7 @@ public class Tests {
     public void Test1() {
 
         var value = new UnitValue(100, UnitCode.SIEVERT);
-        var converted = value.Convert(UnitCode.MISIEVERT, false);
+        var converted = value.Convert(UnitCode.MICRO_SIEVERT, false);
 
         var formatted = converted.ToString();
 
