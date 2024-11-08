@@ -20,7 +20,7 @@ public class Roentgen : AUnit {
 }
 
 /// <summary>
-/// Miliroentgen clas (mR).
+/// MilliRoentgen class (mR).
 /// </summary>
 public class MilliRoentgen : Roentgen {
     /// <inheritdoc />
@@ -30,14 +30,14 @@ public class MilliRoentgen : Roentgen {
     protected override int Multiplier => 1000;
 
     /// <inheritdoc />
-    protected override Type? AscType => typeof(Roentgen);
+    protected override Type AscType => typeof(Roentgen);
 
     /// <inheritdoc />
-    protected override Type? DescType => typeof(MicroRoentgen);
+    protected override Type DescType => typeof(MicroRoentgen);
 }
 
 /// <summary>
-/// Microroentgen class (μR)
+/// MicroRoentgen class (μR)
 /// </summary>
 public class MicroRoentgen : Roentgen {
     /// <inheritdoc />
@@ -48,6 +48,20 @@ public class MicroRoentgen : Roentgen {
 
     /// <inheritdoc />
     protected override Type? AscType => typeof(MilliRoentgen);
+
+    /// <inheritdoc />
+    protected override Type? DescType => typeof(NanoRoentgen);
+}
+
+public class NanoRoentgen : Roentgen {
+    /// <inheritdoc />
+    public override UnitCode UnitCode => UnitCode.NANO_ROENTGEN;
+
+    /// <inheritdoc />
+    protected override int Multiplier => 1000000000;
+
+    /// <inheritdoc />
+    protected override Type AscType => typeof(MicroRoentgen);
 
     /// <inheritdoc />
     protected override Type? DescType => null;
@@ -81,6 +95,17 @@ public class MicroRoentgenPerHour : MicroRoentgen {
 
     /// <inheritdoc />
     protected override Type AscType => typeof(MilliRoentgenPerHour);
+
+    /// <inheritdoc />
+    protected override Type? DescType => typeof(NanoRoentgenPerHour);
+}
+
+public class NanoRoentgenPerHour : NanoRoentgen {
+    /// <inheritdoc />
+    public override UnitCode UnitCode => UnitCode.NANO_ROENTGEN_PER_HOUR;
+
+    /// <inheritdoc />
+    protected override Type AscType => typeof(MicroRoentgenPerHour);
 
     /// <inheritdoc />
     protected override Type? DescType => null;

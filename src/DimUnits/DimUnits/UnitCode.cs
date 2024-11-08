@@ -25,6 +25,11 @@ public enum UnitCode : byte {
     MICRO_ROENTGEN,
 
     /// <summary>
+    /// nR
+    /// </summary>
+    NANO_ROENTGEN,
+
+    /// <summary>
     /// Sv
     /// </summary>
     SIEVERT,
@@ -38,6 +43,11 @@ public enum UnitCode : byte {
     /// μSv
     /// </summary>
     MICRO_SIEVERT,
+
+    /// <summary>
+    /// nSv
+    /// </summary>
+    NANO_SIEVERT,
 
     /// <summary>
     /// R/h (Base value units to store in db for dose rate)
@@ -55,6 +65,11 @@ public enum UnitCode : byte {
     MICRO_ROENTGEN_PER_HOUR,
 
     /// <summary>
+    /// nR/h
+    /// </summary>
+    NANO_ROENTGEN_PER_HOUR,
+
+    /// <summary>
     /// Sv/h
     /// </summary>
     SIEVERT_PER_HOUR,
@@ -68,4 +83,9 @@ public enum UnitCode : byte {
     /// μSv/h
     /// </summary>
     MICRO_SIEVERT_PER_HOUR,
+
+    /// <summary>
+    /// nSv/h
+    /// </summary>
+    NANO_SIEVERT_PER_HOUR,
 }

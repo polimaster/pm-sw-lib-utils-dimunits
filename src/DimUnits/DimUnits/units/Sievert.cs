@@ -50,6 +50,20 @@ public class MicroSievert : Sievert {
     protected override Type AscType => typeof(MilliSievert);
 
     /// <inheritdoc />
+    protected override Type? DescType => typeof(NanoSievert);
+}
+
+public class NanoSievert : Sievert {
+    /// <inheritdoc />
+    public override UnitCode UnitCode => UnitCode.NANO_SIEVERT;
+
+    /// <inheritdoc />
+    protected override int Multiplier => 1000000000;
+
+    /// <inheritdoc />
+    protected override Type AscType => typeof(MicroSievert);
+
+    /// <inheritdoc />
     protected override Type? DescType => null;
 }
 
@@ -90,6 +104,17 @@ public class MicroSievertPerHour : MicroSievert {
 
     /// <inheritdoc />
     protected override Type AscType => typeof(MilliSievertPerHour);
+
+    /// <inheritdoc />
+    protected override Type? DescType => typeof(NanoSievertPerHour);
+}
+
+public class NanoSievertPerHour : NanoSievert {
+    /// <inheritdoc />
+    public override UnitCode UnitCode => UnitCode.NANO_SIEVERT_PER_HOUR;
+
+    /// <inheritdoc />
+    protected override Type AscType => typeof(MicroSievertPerHour);
 
     /// <inheritdoc />
     protected override Type? DescType => null;
