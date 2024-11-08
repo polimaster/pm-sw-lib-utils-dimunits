@@ -55,36 +55,35 @@ public static class Converter {
         return source.Convert(targetUnit, false);
     }
 
-    private static List<ConvertiblePair>? _CONVERT_PAIRS;
+    private static List<ConvertablePair>? _CONVERT_PAIRS;
 
     /// <summary>
     /// Pairs of possible conversions
     /// </summary>
-    public static List<ConvertiblePair> ConvertPairs {
+    public static List<ConvertablePair> ConvertPairs {
         get {
             if (_CONVERT_PAIRS != null) return _CONVERT_PAIRS;
-            _CONVERT_PAIRS = new List<ConvertiblePair>();
+            _CONVERT_PAIRS = [];
 
-            double FromExpression(double value) => value / 100;
-            double ToExpression(double value) => value * 100;
-            var edPair = new ConvertiblePair {
+            var edPair = new ConvertablePair {
                 From2To = FromExpression,
                 To2From = ToExpression,
-                To = new List<UnitCode> { UnitCode.SIEVERT, UnitCode.MSIEVERT, UnitCode.MISIEVERT },
-                From = new List<UnitCode> { UnitCode.ROENTGEN, UnitCode.MROENTGEN, UnitCode.MIROENTGEN }
+                To = [UnitCode.SIEVERT, UnitCode.MILLI_SIEVERT, UnitCode.MICRO_SIEVERT],
+                From = [UnitCode.ROENTGEN, UnitCode.MILLI_ROENTGEN, UnitCode.MICRO_ROENTGEN]
             };
-            var medPair = new ConvertiblePair {
+            var medPair = new ConvertablePair {
                 From2To = FromExpression,
                 To2From = ToExpression,
-                To = new List<UnitCode>
-                    { UnitCode.SIEVERT_PER_HOUR, UnitCode.MSIEVERT_PER_HOUR, UnitCode.MISIEVERT_PER_HOUR },
-                From = new List<UnitCode>
-                    { UnitCode.ROENTGEN_PER_HOUR, UnitCode.MROENTGEN_PER_HOUR, UnitCode.MIROENTGEN_PER_HOUR }
+                To = [UnitCode.SIEVERT_PER_HOUR, UnitCode.MILLI_SIEVERT_PER_HOUR, UnitCode.MICRO_SIEVERT_PER_HOUR],
+                From = [UnitCode.ROENTGEN_PER_HOUR, UnitCode.MILLI_ROENTGEN_PER_HOUR, UnitCode.MICRO_ROENTGEN_PER_HOUR]
             };
             _CONVERT_PAIRS.Add(edPair);
             _CONVERT_PAIRS.Add(medPair);
 
             return _CONVERT_PAIRS;
+
+            double ToExpression(double value) => value * 100;
+            double FromExpression(double value) => value / 100;
         }
     }
 
@@ -94,12 +93,12 @@ public static class Converter {
     /// List of units families
     /// </summary>
     public static IEnumerable<List<UnitCode>?> Families =>
-        _FAMILIES ??= new List<List<UnitCode>?> {
-            new() { UnitCode.ROENTGEN, UnitCode.MROENTGEN, UnitCode.MIROENTGEN },
-            new() { UnitCode.SIEVERT, UnitCode.MSIEVERT, UnitCode.MISIEVERT },
-            new() { UnitCode.ROENTGEN_PER_HOUR, UnitCode.MROENTGEN_PER_HOUR, UnitCode.MIROENTGEN_PER_HOUR },
-            new() { UnitCode.SIEVERT_PER_HOUR, UnitCode.MSIEVERT_PER_HOUR, UnitCode.MISIEVERT_PER_HOUR },
-        };
+        _FAMILIES ??= [
+            new List<UnitCode> { UnitCode.ROENTGEN, UnitCode.MILLI_ROENTGEN, UnitCode.MICRO_ROENTGEN },
+            new List<UnitCode> { UnitCode.SIEVERT, UnitCode.MILLI_SIEVERT, UnitCode.MICRO_SIEVERT },
+            new List<UnitCode> { UnitCode.ROENTGEN_PER_HOUR, UnitCode.MILLI_ROENTGEN_PER_HOUR, UnitCode.MICRO_ROENTGEN_PER_HOUR },
+            new List<UnitCode> { UnitCode.SIEVERT_PER_HOUR, UnitCode.MILLI_SIEVERT_PER_HOUR, UnitCode.MICRO_SIEVERT_PER_HOUR }
+        ];
 
     /// <summary>
     /// Returns family for given <see cref="UnitCode"/>
@@ -108,14 +107,14 @@ public static class Converter {
     /// <returns></returns>
     public static List<UnitCode>? GET_FAMILY(UnitCode code) => Families.FirstOrDefault(t => t != null && t.Any(code1 => code1 == code));
 
-    private static readonly List<UnitCode[]> UNIT_PAIRS = new() {
+    private static readonly List<UnitCode[]> UNIT_PAIRS = [
         new[] { UnitCode.ROENTGEN, UnitCode.ROENTGEN_PER_HOUR },
-        new[] { UnitCode.MROENTGEN, UnitCode.MROENTGEN_PER_HOUR },
-        new[] { UnitCode.MIROENTGEN, UnitCode.MIROENTGEN_PER_HOUR },
+        new[] { UnitCode.MILLI_ROENTGEN, UnitCode.MILLI_ROENTGEN_PER_HOUR },
+        new[] { UnitCode.MICRO_ROENTGEN, UnitCode.MICRO_ROENTGEN_PER_HOUR },
         new[] { UnitCode.SIEVERT, UnitCode.SIEVERT_PER_HOUR },
-        new[] { UnitCode.MSIEVERT, UnitCode.MSIEVERT_PER_HOUR },
-        new[] { UnitCode.MISIEVERT, UnitCode.MISIEVERT_PER_HOUR },
-    };
+        new[] { UnitCode.MILLI_SIEVERT, UnitCode.MILLI_SIEVERT_PER_HOUR },
+        new[] { UnitCode.MICRO_SIEVERT, UnitCode.MICRO_SIEVERT_PER_HOUR }
+    ];
 
     /// <summary>
     /// Returns pair for given unit code.

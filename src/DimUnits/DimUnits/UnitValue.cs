@@ -63,15 +63,15 @@ public readonly struct UnitValue {
         Code = nUnitCode;
     }
 
-    public UnitValue(double value, UnitCode code, bool normalize, bool dinamicaccuracy) {
+    public UnitValue(double value, UnitCode code, bool normalize, bool dynamicAccuracy) {
         var nUnitCode = code;
         Value = normalize ? Converter.Units[code].Normalize(value, out nUnitCode) : value;
         Accuracy = AUnit.BASE_ACCURACY;
-        if (dinamicaccuracy)
-            if (nUnitCode == UnitCode.MISIEVERT_PER_HOUR || nUnitCode == UnitCode.MISIEVERT)
+        if (dynamicAccuracy)
+            if (nUnitCode is UnitCode.MICRO_SIEVERT_PER_HOUR or UnitCode.MICRO_SIEVERT)
                 Accuracy = 2;
-        if (nUnitCode == UnitCode.MSIEVERT_PER_HOUR || nUnitCode == UnitCode.MSIEVERT) Accuracy = 5;
-        if (nUnitCode == UnitCode.SIEVERT_PER_HOUR || nUnitCode == UnitCode.SIEVERT) Accuracy = 8;
+        if (nUnitCode is UnitCode.MILLI_SIEVERT_PER_HOUR or UnitCode.MILLI_SIEVERT) Accuracy = 5;
+        if (nUnitCode is UnitCode.SIEVERT_PER_HOUR or UnitCode.SIEVERT) Accuracy = 8;
         Code = nUnitCode;
     }
 

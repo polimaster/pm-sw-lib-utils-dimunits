@@ -5,7 +5,7 @@ namespace Polimaster.Utils.DimUnits.converters;
 /// <summary>
 /// Convertible pair
 /// </summary>
-public struct ConvertiblePair {
+public struct ConvertablePair {
     /// <summary>
     /// Expression to be executed while converting "From" to "To"
     /// </summary>
