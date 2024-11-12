@@ -126,47 +126,29 @@
   <data name="GAMMA" xml:space="preserve">
     <value>Gamma</value>
   </data>
-  <data name="MIREM" xml:space="preserve">
-    <value>µRem</value>
-  </data>
-  <data name="MIREM_PER_HOUR" xml:space="preserve">
-    <value>µRem/h</value>
-  </data>
-  <data name="MIROENTGEN" xml:space="preserve">
+  <data name="MICRO_ROENTGEN" xml:space="preserve">
     <value>μR</value>
   </data>
-  <data name="MIROENTGEN_PER_HOUR" xml:space="preserve">
+  <data name="MICRO_ROENTGEN_PER_HOUR" xml:space="preserve">
     <value>μR/h</value>
   </data>
-  <data name="MISIEVERT" xml:space="preserve">
+  <data name="MICRO_SIEVERT" xml:space="preserve">
     <value>μSv</value>
   </data>
-  <data name="MISIEVERT_PER_HOUR" xml:space="preserve">
+  <data name="MICRO_SIEVERT_PER_HOUR" xml:space="preserve">
     <value>μSv/h</value>
   </data>
-  <data name="MREM" xml:space="preserve">
-    <value>mRem</value>
-  </data>
-  <data name="MREM_PER_HOUR" xml:space="preserve">
-    <value>mRem/h</value>
-  </data>
-  <data name="MROENTGEN" xml:space="preserve">
+  <data name="MILLI_ROENTGEN" xml:space="preserve">
     <value>mR</value>
   </data>
-  <data name="MROENTGEN_PER_HOUR" xml:space="preserve">
+  <data name="MILLI_ROENTGEN_PER_HOUR" xml:space="preserve">
     <value>mR/h</value>
   </data>
-  <data name="MSIEVERT" xml:space="preserve">
+  <data name="MILLI_SIEVERT" xml:space="preserve">
     <value>mSv</value>
   </data>
-  <data name="MSIEVERT_PER_HOUR" xml:space="preserve">
+  <data name="MILLI_SIEVERT_PER_HOUR" xml:space="preserve">
     <value>mSv/h</value>
-  </data>
-  <data name="REM" xml:space="preserve">
-    <value>Rem</value>
-  </data>
-  <data name="REM_PER_HOUR" xml:space="preserve">
-    <value>Rem/h</value>
   </data>
   <data name="ROENTGEN" xml:space="preserve">
     <value>R</value>
@@ -179,5 +161,17 @@
   </data>
   <data name="SIEVERT_PER_HOUR" xml:space="preserve">
     <value>Sv/h</value>
+  </data>
+  <data name="NANO_SIEVERT" xml:space="preserve">
+    <value>nSv</value>
+  </data>
+  <data name="NANO_ROENTGEN" xml:space="preserve">
+    <value>nR</value>
+  </data>
+  <data name="NANO_ROENTGEN_PER_HOUR" xml:space="preserve">
+    <value>nR/h</value>
+  </data>
+  <data name="NANO_SIEVERT_PER_HOUR" xml:space="preserve">
+    <value>nSv/h</value>
   </data>
 </root>
