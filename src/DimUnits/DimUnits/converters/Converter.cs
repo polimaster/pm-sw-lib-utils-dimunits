@@ -68,14 +68,14 @@ public static class Converter {
             var edPair = new ConvertablePair {
                 From2To = FromExpression,
                 To2From = ToExpression,
-                To = [UnitCode.SIEVERT, UnitCode.MILLI_SIEVERT, UnitCode.MICRO_SIEVERT],
-                From = [UnitCode.ROENTGEN, UnitCode.MILLI_ROENTGEN, UnitCode.MICRO_ROENTGEN]
+                To = [UnitCode.SIEVERT, UnitCode.MILLI_SIEVERT, UnitCode.MICRO_SIEVERT, UnitCode.NANO_SIEVERT],
+                From = [UnitCode.ROENTGEN, UnitCode.MILLI_ROENTGEN, UnitCode.MICRO_ROENTGEN, UnitCode.NANO_ROENTGEN]
             };
             var medPair = new ConvertablePair {
                 From2To = FromExpression,
                 To2From = ToExpression,
-                To = [UnitCode.SIEVERT_PER_HOUR, UnitCode.MILLI_SIEVERT_PER_HOUR, UnitCode.MICRO_SIEVERT_PER_HOUR],
-                From = [UnitCode.ROENTGEN_PER_HOUR, UnitCode.MILLI_ROENTGEN_PER_HOUR, UnitCode.MICRO_ROENTGEN_PER_HOUR]
+                To = [UnitCode.SIEVERT_PER_HOUR, UnitCode.MILLI_SIEVERT_PER_HOUR, UnitCode.MICRO_SIEVERT_PER_HOUR, UnitCode.NANO_SIEVERT_PER_HOUR],
+                From = [UnitCode.ROENTGEN_PER_HOUR, UnitCode.MILLI_ROENTGEN_PER_HOUR, UnitCode.MICRO_ROENTGEN_PER_HOUR, UnitCode.NANO_ROENTGEN_PER_HOUR]
             };
             _CONVERT_PAIRS.Add(edPair);
             _CONVERT_PAIRS.Add(medPair);
@@ -94,10 +94,10 @@ public static class Converter {
     /// </summary>
     public static IEnumerable<List<UnitCode>?> Families =>
         _FAMILIES ??= [
-            new List<UnitCode> { UnitCode.ROENTGEN, UnitCode.MILLI_ROENTGEN, UnitCode.MICRO_ROENTGEN },
-            new List<UnitCode> { UnitCode.SIEVERT, UnitCode.MILLI_SIEVERT, UnitCode.MICRO_SIEVERT },
-            new List<UnitCode> { UnitCode.ROENTGEN_PER_HOUR, UnitCode.MILLI_ROENTGEN_PER_HOUR, UnitCode.MICRO_ROENTGEN_PER_HOUR },
-            new List<UnitCode> { UnitCode.SIEVERT_PER_HOUR, UnitCode.MILLI_SIEVERT_PER_HOUR, UnitCode.MICRO_SIEVERT_PER_HOUR }
+            new List<UnitCode> { UnitCode.ROENTGEN, UnitCode.MILLI_ROENTGEN, UnitCode.MICRO_ROENTGEN, UnitCode.NANO_ROENTGEN },
+            new List<UnitCode> { UnitCode.SIEVERT, UnitCode.MILLI_SIEVERT, UnitCode.MICRO_SIEVERT, UnitCode.NANO_SIEVERT },
+            new List<UnitCode> { UnitCode.ROENTGEN_PER_HOUR, UnitCode.MILLI_ROENTGEN_PER_HOUR, UnitCode.MICRO_ROENTGEN_PER_HOUR, UnitCode.NANO_ROENTGEN_PER_HOUR },
+            new List<UnitCode> { UnitCode.SIEVERT_PER_HOUR, UnitCode.MILLI_SIEVERT_PER_HOUR, UnitCode.MICRO_SIEVERT_PER_HOUR, UnitCode.NANO_SIEVERT_PER_HOUR },
         ];
 
     /// <summary>
@@ -111,9 +111,11 @@ public static class Converter {
         new[] { UnitCode.ROENTGEN, UnitCode.ROENTGEN_PER_HOUR },
         new[] { UnitCode.MILLI_ROENTGEN, UnitCode.MILLI_ROENTGEN_PER_HOUR },
         new[] { UnitCode.MICRO_ROENTGEN, UnitCode.MICRO_ROENTGEN_PER_HOUR },
+        new[] { UnitCode.NANO_ROENTGEN, UnitCode.NANO_ROENTGEN_PER_HOUR },
         new[] { UnitCode.SIEVERT, UnitCode.SIEVERT_PER_HOUR },
         new[] { UnitCode.MILLI_SIEVERT, UnitCode.MILLI_SIEVERT_PER_HOUR },
-        new[] { UnitCode.MICRO_SIEVERT, UnitCode.MICRO_SIEVERT_PER_HOUR }
+        new[] { UnitCode.MICRO_SIEVERT, UnitCode.MICRO_SIEVERT_PER_HOUR },
+        new[] { UnitCode.NANO_SIEVERT, UnitCode.NANO_SIEVERT_PER_HOUR }
     ];
 
     /// <summary>
